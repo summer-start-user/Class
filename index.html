@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#1e5fd0">
+<title>2026级虚拟现实技术应用3班 · 课程表</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+  [hidden] { display: none !important; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "微软雅黑", sans-serif;
+    background: #eef3fa;
+    padding: 32px 16px;
+    color: #1f2937;
+  }
+  /* 媒体元素统一自适应（页面内若后续加入图片/视频亦生效） */
+  img, video, canvas, iframe, svg { max-width: 100%; }
+  img, video { height: auto; display: block; }
+  .card {
+    max-width: 73.75rem;              /* 1180px / 16 */
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(37, 99, 235, .12);
+    overflow: hidden;
+  }
+  .title {
+    padding: 22px 28px 14px;
+    border-bottom: 1px solid #e8eef7;
+  }
+  .title h1 { font-size: 20px; color: #1e3a8a; letter-spacing: 1px; }
+  .title p { margin-top: 6px; font-size: 13px; color: #64748b; }
+  .btn-group { display: flex; gap: 10px; margin-top: 16px; }
+  .btn {
+    font-family: inherit;
+    padding: 8px 20px;
+    border-radius: 999px;
+    border: 1.5px solid #2f7df6;
+    background: #fff;
+    color: #2f7df6;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s;
+    -webkit-appearance: none;
+    appearance: none;
+    touch-action: manipulation;
+  }
+  .btn:hover { background: #e8f1ff; }
+  .btn.active {
+    background: linear-gradient(135deg, #2f7df6, #1e5fd0);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 4px 12px rgba(47, 125, 246, .35);
+  }
+  .view-note { margin-top: 10px; font-size: 12.5px; color: #64748b; }
+  .view-note b { color: #1d4ed8; }
+  .table-wrap { padding: 18px; overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
+  table {
+    width: 100%;
+    min-width: 53.75rem;              /* 860px / 16 */
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+  th, td {
+    border: 1px solid #dbe3f0;
+    text-align: center;
+    vertical-align: middle;
+    padding: 6px;
+    font-size: 13px;
+  }
+  thead th {
+    background: linear-gradient(135deg, #2f7df6, #1e5fd0);
+    color: #fff;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 2px;
+    padding: 12px 6px;
+  }
+  td.info {
+    background: linear-gradient(135deg, #dce9ff, #eaf3ff);
+    color: #1e3a8a;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 2.1;
+  }
+  td.slot {
+    background: #e8f1ff;
+    color: #2563eb;
+    font-weight: 700;
+    font-size: 13.5px;
+    letter-spacing: 1px;
+    width: 6rem;                      /* 96px / 16 */
+  }
+  tr.data-row td.course-cell { height: 150px; }
+  td.empty { background: #f7f9fd; color: #cdd7e6; font-size: 14px; }
+  .col-hidden { display: none; }
+  table.today-mode { min-width: 0; width: auto; margin: 0 auto; }
+  .hint-mobile { display: none; }
+  @media (max-width: 640px) {
+    body { padding: 14px 8px; }
+    .title { padding: 16px 16px 12px; }
+    .title h1 { font-size: 16px; }
+    .title p { font-size: 12px; }
+    .btn-group { flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .btn { padding: 7px 14px; font-size: 13px; }
+    .view-note { font-size: 12px; }
+    .hint-mobile { display: inline; }
+    .table-wrap { padding: 8px; }
+    .foot { padding: 12px 16px 14px; font-size: 11px; }
+    table { min-width: 56.25rem; }     /* 900px / 16 */
+    table.today-mode { width: 100%; }
+    table.today-mode th.info, table.today-mode td.info { display: none; }
+    table.today-mode td.slot { width: 5.25rem; }   /* 84px / 16 */
+    td.slot, thead th { letter-spacing: 1px; }
+    tr.data-row td.course-cell { height: 132px; }
+    table.today-mode tr.data-row td.course-cell { height: 80px; }
+    table.today-mode .c-name { font-size: 13px; }
+    table.today-mode .badge { font-size: 10px; padding: 0 6px; }
+    table.today-mode .c-loc { font-size: 10.5px; }
+    table.today-mode .c-tea { font-size: 11px; }
+    table.today-mode .block { line-height: 1.5; padding: 3px 2px; }
+    table.today-mode .block + .block { padding-top: 6px; margin-top: 4px; }
+    .table-wrap:has(table.today-mode) + .foot { display: none; }
+  }
+  .block { padding: 6px 4px; line-height: 1.9; }
+  .block + .block { border-top: 1px dashed #dbe3f0; padding-top: 10px; margin-top: 8px; }
+  .c-top { display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap; }
+  .c-name { font-size: 14.5px; font-weight: 700; color: #1e293b; }
+  .badge {
+    display: inline-block;
+    background: #dbeafe;
+    color: #1d4ed8;
+    border-radius: 999px;
+    padding: 1px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .c-loc { font-size: 12px; color: #64748b; }
+  .c-tea { font-size: 12.5px; color: #2563eb; font-weight: 600; }
+  .foot {
+    padding: 14px 28px 18px;
+    border-top: 1px solid #e8eef7;
+    font-size: 12px;
+    color: #94a3b8;
+    line-height: 1.8;
+  }
+
+  /* ===== 新增：今日课表移动端单列列表（仅 <768px 可见） ===== */
+  .today-list { display: none; }
+
+  /* ============================================================
+     移动端适配：平板与手机（<1024px）
+     - rem 基准随视口缩放
+     - 所有可点击元素 ≥44×44px
+     - 表单控件 ≥16px（避免 iOS 聚焦自动缩放）
+     ============================================================ */
+  @media (max-width: 1023px) {
+    html { font-size: clamp(14px, 12px + 1vw, 17px); }
+
+    body {
+      padding: 0.875rem 0.75rem;
+      padding-left: max(0.75rem, env(safe-area-inset-left));
+      padding-right: max(0.75rem, env(safe-area-inset-right));
+      padding-bottom: max(0.875rem, env(safe-area-inset-bottom));
+    }
+
+    .card { border-radius: 0.875rem; }
+
+    .title {
+      padding: 0.875rem 1rem 0.625rem;
+    }
+    .title h1 { font-size: 1.0625rem; line-height: 1.35; letter-spacing: .5px; }
+    .title p { font-size: 0.8125rem; margin-top: 0.375rem; }
+
+    /* 触控目标 ≥44×44px */
+    .btn {
+      flex: 1 1 auto;
+      min-height: 2.75rem;            /* 44px */
+      min-width: 2.75rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn-group { gap: 0.5rem; margin-top: 0.75rem; }
+    .view-note { font-size: 0.8125rem; margin-top: 0.5rem; line-height: 1.5; }
+
+    .table-wrap {
+      padding: 0.5rem;
+      touch-action: pan-x pan-y;
+    }
+
+    /* 表单控件：字号 ≥16px，触控 ≥44px */
+    input, select, textarea {
+      font-family: inherit;
+      font-size: max(16px, 1rem);
+      min-height: 2.75rem;
+      border-radius: 0.625rem;
+      border: 1px solid #c7d7ef;
+      background: #fff;
+      color: #1f2937;
+      padding: 0.375rem 0.625rem;
+    }
+  }
+
+  /* ============================================================
+     手机（≤768px）：多列栅格 → 单列纵向堆叠
+     ============================================================ */
+  @media (max-width: 768px) {
+    body { padding: 0.625rem 0.5rem; }
+    .title { padding: 0.75rem 0.875rem 0.5rem; }
+    .title h1 { font-size: 1rem; }
+
+    /* 今日课表：表格 → 单列卡片列表 */
+    .today-list { display: none; }
+    body.today-view .table-wrap { display: none; }
+    body.today-view .foot { display: none; }
+    body.today-view .title p { display: none; }
+    body.today-view .today-list {
+      display: block;
+      padding: 0.5rem 0.75rem 0.75rem;
+      max-height: calc(100vh - 9.5rem);
+      max-height: calc(100dvh - 9.5rem);   /* 兜底滚动，优先一屏完整展示 */
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+    }
+
+    .tl-row {
+      display: flex;
+      align-items: stretch;
+      gap: 0.5rem;
+      background: #fff;
+      border: 1px solid #dbe3f0;
+      border-radius: 0.625rem;
+      overflow: hidden;
+    }
+    .tl-row + .tl-row { margin-top: 0.375rem; }
+    .tl-slot {
+      flex: 0 0 4.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #e8f1ff, #dce9ff);
+      color: #2563eb;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: .5px;
+      padding: 0.375rem 0.25rem;
+      text-align: center;
+      line-height: 1.3;
+    }
+    .tl-main {
+      flex: 1 1 auto;
+      min-width: 0;
+      padding: 0.5rem 0.625rem;
+      text-align: left;
+    }
+    .tl-block + .tl-block {
+      margin-top: 0.375rem;
+      padding-top: 0.375rem;
+      border-top: 1px dashed #dbe3f0;
+    }
+    .tl-name {
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: #1e293b;
+      line-height: 1.35;
+      word-break: break-word;
+    }
+    .tl-badge {
+      display: inline-block;
+      margin-left: 0.375rem;
+      background: #dbeafe;
+      color: #1d4ed8;
+      border-radius: 999px;
+      padding: 0 0.375rem;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      white-space: nowrap;
+      vertical-align: 2px;
+    }
+    .tl-meta {
+      margin-top: 0.1875rem;
+      font-size: 0.75rem;
+      color: #64748b;
+      line-height: 1.45;
+      word-break: break-word;
+    }
+    .tl-row-off { background: #f7f9fd; }
+    .tl-row-off .tl-slot { background: #eef2f8; color: #94a3b8; }
+    .tl-none { font-size: 0.8125rem; color: #b6c2d4; padding: 0.25rem 0; }
+
+    .tl-empty-day {
+      padding: 1.5rem 1rem;
+      text-align: center;
+      font-size: 0.9375rem;
+      color: #64748b;
+      background: #f7f9fd;
+      border: 1px dashed #dbe3f0;
+      border-radius: 0.625rem;
+    }
+
+    /* 全部课表：横向滑动表格（保留二维结构），列宽与字号改用相对单位 */
+    table { min-width: 40rem; }
+    td.slot { width: 4.5rem; font-size: 0.75rem; }
+    th, td { padding: 0.3125rem; font-size: 0.75rem; }
+    thead th { font-size: 0.8125rem; letter-spacing: 1px; padding: 0.5rem 0.25rem; }
+    td.info { font-size: 0.8125rem; line-height: 1.7; }
+    tr.data-row td.course-cell { height: 6.75rem; }
+    .c-name { font-size: 0.8125rem; }
+    .c-loc { font-size: 0.6875rem; }
+    .c-tea { font-size: 0.75rem; }
+    .badge { font-size: 0.625rem; padding: 0 0.3125rem; }
+    .block { padding: 0.25rem 0.125rem; line-height: 1.5; }
+    .block + .block { padding-top: 0.375rem; margin-top: 0.25rem; }
+
+    .foot { padding: 0.75rem 1rem 0.875rem; font-size: 0.6875rem; line-height: 1.7; }
+  }
+
+  /* 超矮屏进一步压缩，保证今日课表一屏可见 */
+  @media (max-width: 768px) and (max-height: 640px) {
+    body.today-view .title { padding: 0.5rem 0.875rem 0.375rem; }
+    body.today-view .title h1 { font-size: 0.9375rem; }
+    body.today-view .view-note { margin-top: 0.375rem; font-size: 0.75rem; }
+    .tl-row + .tl-row { margin-top: 0.25rem; }
+    .tl-main { padding: 0.375rem 0.5rem; }
+    .tl-name { font-size: 0.875rem; }
+    .tl-meta { font-size: 0.6875rem; }
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="title">
+    <h1 id="page-title">2026级虚拟现实技术应用3班 · 课程表</h1>
+    <p>院系：传媒艺术系</p>
+    <div class="btn-group">
+      <button id="btn-all" class="btn active" type="button">查看全部课表</button>
+      <button id="btn-today" class="btn" type="button">今日课表</button>
+    </div>
+    <div class="view-note" id="view-note">当前显示：全部课程<span class="hint-mobile"> · 手机上可左右滑动查看</span></div>
+  </div>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th rowspan="4" class="info">传媒艺术系<br>2026级<br>虚拟现实技术应用3班</th>
+        <th data-day="mon">星期一</th>
+        <th data-day="tue">星期二</th>
+        <th data-day="wed">星期三</th>
+        <th data-day="thu">星期四</th>
+        <th data-day="fri">星期五</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="data-row">
+        <td class="slot">第1-2节</td>
+        <td data-day="mon" class="course-cell">
+          <div class="block">
+            <div class="c-top"><span class="c-name">构成</span><span class="badge">5-18周</span></div>
+            <div class="c-loc">东校区·知新8号楼-423 · 41人</div>
+            <div class="c-tea">于静璇</div>
+          </div>
+        </td>
+        <td data-day="tue" class="course-cell">
+          <div class="block">
+            <div class="c-top"><span class="c-name">人工智能通识教育</span><span class="badge">5-18周</span></div>
+            <div class="c-loc">东校区·启智②号楼-424 · 41人</div>
+            <div class="c-tea">杨志浩</div>
+          </div>
+        </td>
+        <td data-day="wed" class="course-cell empty">—</td>
+        <td data-day="thu" class="course-cell">
+          <div class="block">
+            <div class="c-top"><span class="c-name">智能数字图像处理</span><span class="badge">5-18周</span></div>
+            <div class="c-loc">东校区·知新10号楼-105 · 41人</div>
+            <div class="c-tea">王宁</div>
+          </div>
+        </td>
+        <td data-day="fri" class="course-cell">
+          <div class="block">
+            <div class="c-top"><span class="c-name">高等数学</span><span class="badge">5-18周</span></div>
+            <div class="c-loc">东校区·启智②号楼-126 · 82人</div>
+            <div class="c-tea">王路平</div>
+          </div>
+        </td>
+      </tr>
+
+      <tr class="data-row">
+        <td class="slot">第3-4节</td>
+        <td data-day="mon" class="course-cell">
+          <div class="block">
+            <div class="c-top"><span class="c-name">构成</span><span class="badge">5-18周</span></div>
+            <div class="c-loc">东校区·知新8号楼-423 · 41人</div>
+            <div class="c-tea">于静璇</div>
+          </div>
+        </td>
+        <td data-day="tue" class="course-cell">
+          <div class="block">
+            <div class="c-top"><span class="c-name">人工智能通识教育</span><span class="badge">5-18周</span></div>
+            <div class="c-loc">东校区·启智②号楼-424 · 41人</div>
+            <div class="c-tea">杨志浩</div>
+          </div>
+        </td>
+        <td data-day="wed" class="course-cell empty">—</td>
+        <td data-day="thu" class="course-cell">
+          <div class="block">
+            <div class="c-top"><span class="c-name">职业发展与就业指导（一）职业启蒙</span><span class="badge">5-18周</span></div>
+            <div class="c-loc">东校区·启智②号楼-226 · 125人</div>
+            <div class="c-tea">付雪彦</div>
+          </div>
+        </td>
+        <td data-day="fri" class="course-cell empty">—</td>
+      </tr>
+
+      <tr class="data-row">
+        <td class="slot">第5-6节</td>
+        <td data-day="mon" class="course-cell">
+          <div class="block">
+            <div class="c-top"><span class="c-name">形势与政策</span><span class="badge">13-16周</span></div>
+            <div class="c-loc">东校区·启智③号楼-147 · 41人</div>
+            <div class="c-tea">陈肖桦</div>
+          </div>
+          <div class="block">
+            <div class="c-top"><span class="c-name">思想道德与法治</span><span class="badge">5-12;17-18周</span></div>
+            <div class="c-loc">东校区·启智③号楼-147 · 41人</div>
+            <div class="c-tea">张婷</div>
+          </div>
+        </td>
+        <td data-day="tue" class="course-cell">
+          <div class="block">
+            <div class="c-top"><span class="c-name">体育</span><span class="badge">5-18周</span></div>
+            <div class="c-loc">41人</div>
+            <div class="c-tea">曹未</div>
+          </div>
+        </td>
+        <td data-day="wed" class="course-cell">
+          <div class="block">
+            <div class="c-top"><span class="c-name">高职英语</span><span class="badge">5-18周</span></div>
+            <div class="c-loc">东校区·启智②号楼-333 · 82人</div>
+            <div class="c-tea">吕娜</div>
+          </div>
+        </td>
+        <td data-day="thu" class="course-cell">
+          <div class="block">
+            <div class="c-top"><span class="c-name">高职英语</span><span class="badge">5-18周</span></div>
+            <div class="c-loc">东校区·启智②号楼-232 · 82人</div>
+            <div class="c-tea">吕娜</div>
+          </div>
+        </td>
+        <td data-day="fri" class="course-cell empty">—</td>
+      </tr>
+
+      <tr class="data-row">
+        <td class="slot">第7-8节</td>
+        <td data-day="mon" class="course-cell empty">—</td>
+        <td data-day="tue" class="course-cell empty">—</td>
+        <td data-day="wed" class="course-cell">
+          <div class="block">
+            <div class="c-top"><span class="c-name">劳动专题教育</span><span class="badge">12-18周</span></div>
+            <div class="c-loc">东校区·启智②号楼-230 · 82人</div>
+            <div class="c-tea">雷云杉</div>
+          </div>
+          <div class="block">
+            <div class="c-top"><span class="c-name">国家安全教育</span><span class="badge">5-11周</span></div>
+            <div class="c-loc">东校区·启智②号楼-230 · 82人</div>
+            <div class="c-tea">雷云杉</div>
+          </div>
+        </td>
+        <td data-day="thu" class="course-cell">
+          <div class="block">
+            <div class="c-top"><span class="c-name">智能数字图像处理</span><span class="badge">5-18周</span></div>
+            <div class="c-loc">东校区·知新10号楼-105 · 41人</div>
+            <div class="c-tea">王宁</div>
+          </div>
+        </td>
+        <td data-day="fri" class="course-cell empty">—</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- 今日课表：≤768px 单列纵向卡片列表（数据由表格同步生成） -->
+  <div class="today-list" id="today-list"></div>
+
+  <div class="foot">
+    说明：周次为该课程开课周数；82人/125人课程为本班与艺术设计3班等合班上课；「—」表示该时段无课。
+  </div>
+</div>
+
+
+<script>
+  /* ========== 原有课表逻辑（保持不变） ========== */
+  var DAY_NAMES = { mon: '星期一', tue: '星期二', wed: '星期三', thu: '星期四', fri: '星期五', sat: '星期六', sun: '星期日' };
+  var DAY_KEYS = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+  var todayKey = DAY_KEYS[new Date().getDay()];
+  var BASE_TITLE = '2026级虚拟现实技术应用3班 · 课程表';
+  var cells = document.querySelectorAll('[data-day]');
+  var note = document.getElementById('view-note');
+  var title = document.getElementById('page-title');
+  var wrap = document.querySelector('.table-wrap');
+  var btnAll = document.getElementById('btn-all');
+  var btnToday = document.getElementById('btn-today');
+
+  function showAll() {
+    btnAll.classList.add('active');
+    btnToday.classList.remove('active');
+    wrap.classList.remove('today-mode');
+    document.body.classList.remove('today-view');
+    cells.forEach(function (c) { c.classList.remove('col-hidden'); });
+    title.textContent = BASE_TITLE;
+    note.innerHTML = '当前显示：全部课程<span class="hint-mobile"> · 手机上可左右滑动查看</span>';
+  }
+
+  function showToday() {
+    btnToday.classList.add('active');
+    btnAll.classList.remove('active');
+    wrap.classList.add('today-mode');
+    document.body.classList.add('today-view');
+    if (todayKey === 'sat' || todayKey === 'sun') {
+      cells.forEach(function (c) { c.classList.add('col-hidden'); });
+      title.textContent = BASE_TITLE;
+      note.innerHTML = '今天是<b>' + DAY_NAMES[todayKey] + '</b>，本日无课程安排';
+      return;
+    }
+    cells.forEach(function (c) {
+      c.classList.toggle('col-hidden', c.getAttribute('data-day') !== todayKey);
+    });
+    title.textContent = '2026级虚拟现实技术应用3班 · ' + DAY_NAMES[todayKey] + '课表';
+    note.innerHTML = '当前显示：<b>' + DAY_NAMES[todayKey] + '</b>的课程，竖屏即可查看';
+  }
+
+  btnAll.addEventListener('click', showAll);
+  btnToday.addEventListener('click', showToday);
+
+  /* ========== 新增：今日课表移动端单列列表（数据源仍为表格） ========== */
+  var todayList = document.getElementById('today-list');
+
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  }
+
+  function textOf(node, sel) {
+    var el = node.querySelector(sel);
+    return el ? el.textContent.trim() : '';
+  }
+
+  function buildTodayList() {
+    if (!todayList) return;
+    todayList.removeAttribute('hidden');   // 避免 hidden 属性压过媒体查询的 display
+    if (todayKey === 'sat' || todayKey === 'sun') {
+      todayList.innerHTML = '<div class="tl-empty-day">今天是' + esc(DAY_NAMES[todayKey]) + '，本日无课程安排</div>';
+      return;
+    }
+    var rows = document.querySelectorAll('tr.data-row');
+    var parts = [];
+    for (var i = 0; i < rows.length; i++) {
+      var tr = rows[i];
+      var slotEl = tr.querySelector('td.slot');
+      var cell = tr.querySelector('td.course-cell[data-day="' + todayKey + '"]');
+      if (!slotEl || !cell) continue;
+      var slotText = esc(slotEl.textContent.trim());
+      if (cell.classList.contains('empty')) {
+        parts.push('<div class="tl-row tl-row-off"><div class="tl-slot">' + slotText +
+          '</div><div class="tl-main"><div class="tl-none">无课</div></div></div>');
+        continue;
+      }
+      var blocks = cell.querySelectorAll('.block');
+      var inner = '';
+      for (var j = 0; j < blocks.length; j++) {
+        var b = blocks[j];
+        var name = textOf(b, '.c-name');
+        var badge = textOf(b, '.badge');
+        var loc = textOf(b, '.c-loc');
+        var tea = textOf(b, '.c-tea');
+        var meta = [];
+        if (loc) meta.push(loc);
+        if (tea) meta.push(tea);
+        inner += '<div class="tl-block">' +
+          '<div class="tl-name">' + esc(name) +
+          (badge ? '<span class="tl-badge">' + esc(badge) + '</span>' : '') + '</div>' +
+          '<div class="tl-meta">' + esc(meta.join(' · ')) + '</div>' +
+          '</div>';
+      }
+      parts.push('<div class="tl-row"><div class="tl-slot">' + slotText +
+        '</div><div class="tl-main">' + inner + '</div></div>');
+    }
+    if (!parts.length) {
+      todayList.innerHTML = '<div class="tl-empty-day">今天没有课程安排</div>';
+      return;
+    }
+    todayList.innerHTML = parts.join('');
+  }
+
+  buildTodayList();
+</script>
+</body>
+</html>
