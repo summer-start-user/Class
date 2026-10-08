@@ -150,6 +150,61 @@
     line-height: 1.8;
   }
 
+  /* ===== 新增：节次时间标注 ===== */
+  td.slot .slot-time {
+    display: block;
+    margin-top: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #6d94e8;
+    letter-spacing: 0;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  /* ===== 新增：作息时间视图 ===== */
+  .schedule-view { padding: 18px; }
+  .sch-head { text-align: center; margin-bottom: 12px; }
+  .sch-school { font-size: 15px; font-weight: 700; color: #1e3a8a; letter-spacing: 2px; }
+  .sch-sub { margin-top: 4px; font-size: 12.5px; color: #64748b; }
+  .schedule-view table {
+    min-width: 0;
+    width: 100%;
+    max-width: 34rem;
+    margin: 0 auto;
+    table-layout: auto;
+  }
+  .schedule-view thead th { font-size: 13px; letter-spacing: 2px; padding: 8px 6px; }
+  .schedule-view tr.section td {
+    background: linear-gradient(135deg, #2f7df6, #1e5fd0);
+    color: #fff;
+    font-weight: 700;
+    font-size: 13.5px;
+    letter-spacing: 4px;
+    padding: 7px 6px;
+  }
+  .schedule-view td.s-name {
+    text-align: left;
+    padding-left: 18px;
+    font-size: 13.5px;
+    color: #334155;
+  }
+  .schedule-view td.s-time {
+    font-weight: 700;
+    color: #2563eb;
+    white-space: nowrap;
+    font-size: 13.5px;
+    width: 9rem;
+  }
+  .sch-foot {
+    max-width: 34rem;
+    margin: 12px auto 0;
+    font-size: 12px;
+    color: #94a3b8;
+    line-height: 1.8;
+  }
+  .sch-foot div { padding: 2px 0; }
+
   /* ===== 新增：今日课表移动端单列列表（仅 <768px 可见） ===== */
   .today-list { display: none; }
 
@@ -296,6 +351,7 @@
     .tl-row-off { background: #f7f9fd; }
     .tl-row-off .tl-slot { background: #eef2f8; color: #94a3b8; }
     .tl-none { font-size: 0.8125rem; color: #b6c2d4; padding: 0.25rem 0; }
+    .tl-slot-time { display: block; margin-top: 2px; font-size: 0.625rem; font-weight: 600; color: #6d94e8; letter-spacing: 0; }
 
     .tl-empty-day {
       padding: 1.5rem 1rem;
@@ -322,6 +378,19 @@
     .block + .block { padding-top: 0.375rem; margin-top: 0.25rem; }
 
     .foot { padding: 0.75rem 1rem 0.875rem; font-size: 0.6875rem; line-height: 1.7; }
+
+    /* 作息时间视图（移动端） */
+    td.slot .slot-time { font-size: 9.5px; margin-top: 2px; }
+    .schedule-view { padding: 0.5rem 0.625rem 0.75rem; }
+    .sch-head { margin-bottom: 0.625rem; }
+    .sch-school { font-size: 0.875rem; }
+    .sch-sub { font-size: 0.6875rem; }
+    .schedule-view thead th { font-size: 0.75rem; padding: 0.5rem 0.25rem; }
+    .schedule-view tr.section td { font-size: 0.8125rem; letter-spacing: 3px; padding: 0.4375rem 0.25rem; }
+    .schedule-view td.s-name, .schedule-view td.s-time { font-size: 0.8125rem; }
+    .schedule-view td.s-name { padding-left: 0.875rem; }
+    .schedule-view td.s-time { width: 7.5rem; }
+    .sch-foot { font-size: 0.6875rem; line-height: 1.7; margin-top: 0.625rem; }
   }
 
   /* 超矮屏进一步压缩，保证今日课表一屏可见 */
@@ -342,10 +411,11 @@
     <h1 id="page-title">2026级虚拟现实技术应用3班 · 课程表</h1>
     <p>院系：传媒艺术系</p>
     <div class="btn-group">
-      <button id="btn-all" class="btn active" type="button">查看全部课表</button>
-      <button id="btn-today" class="btn" type="button">今日课表</button>
+      <button id="btn-all" class="btn" type="button">查看全部课表</button>
+      <button id="btn-today" class="btn active" type="button">今日课表</button>
+      <button id="btn-schedule" class="btn" type="button">作息时间</button>
     </div>
-    <div class="view-note" id="view-note">当前显示：全部课程<span class="hint-mobile"> · 手机上可左右滑动查看</span></div>
+    <div class="view-note" id="view-note">当前显示：今日课表</div>
   </div>
 
   <div class="table-wrap">
@@ -362,7 +432,7 @@
     </thead>
     <tbody>
       <tr class="data-row">
-        <td class="slot">第1-2节</td>
+        <td class="slot">第1-2节<span class="slot-time">8:30—10:00</span></td>
         <td data-day="mon" class="course-cell">
           <div class="block">
             <div class="c-top"><span class="c-name">构成</span><span class="badge">5-18周</span></div>
@@ -395,7 +465,7 @@
       </tr>
 
       <tr class="data-row">
-        <td class="slot">第3-4节</td>
+        <td class="slot">第3-4节<span class="slot-time">10:20—11:50</span></td>
         <td data-day="mon" class="course-cell">
           <div class="block">
             <div class="c-top"><span class="c-name">构成</span><span class="badge">5-18周</span></div>
@@ -422,7 +492,7 @@
       </tr>
 
       <tr class="data-row">
-        <td class="slot">第5-6节</td>
+        <td class="slot">第5-6节<span class="slot-time">14:00—15:30</span></td>
         <td data-day="mon" class="course-cell">
           <div class="block">
             <div class="c-top"><span class="c-name">形势与政策</span><span class="badge">13-16周</span></div>
@@ -460,7 +530,7 @@
       </tr>
 
       <tr class="data-row">
-        <td class="slot">第7-8节</td>
+        <td class="slot">第7-8节<span class="slot-time">15:40—17:10</span></td>
         <td data-day="mon" class="course-cell empty">—</td>
         <td data-day="tue" class="course-cell empty">—</td>
         <td data-day="wed" class="course-cell">
@@ -491,6 +561,44 @@
   <!-- 今日课表：≤768px 单列纵向卡片列表（数据由表格同步生成） -->
   <div class="today-list" id="today-list"></div>
 
+  <!-- 作息时间视图（依据附件《新作息时间表.docx》，2024年5月6日起执行） -->
+  <div class="schedule-view" id="schedule-view" hidden>
+    <div class="sch-head">
+      <div class="sch-school">石家庄信息工程职业学院</div>
+      <div class="sch-sub">作 息 时 间 表（2024年5月6日起执行）</div>
+    </div>
+    <table>
+      <thead>
+        <tr><th>项目</th><th>时间</th></tr>
+      </thead>
+      <tbody>
+        <tr class="section"><td colspan="2">上午</td></tr>
+        <tr><td class="s-name">起床</td><td class="s-time">6:30</td></tr>
+        <tr><td class="s-name">早操</td><td class="s-time">6:40—7:00</td></tr>
+        <tr><td class="s-name">洗漱</td><td class="s-time">7:00—7:20</td></tr>
+        <tr><td class="s-name">清理宿舍卫生</td><td class="s-time">7:20—7:50</td></tr>
+        <tr><td class="s-name">早饭</td><td class="s-time">7:50—8:20</td></tr>
+        <tr><td class="s-name">预备</td><td class="s-time">8:20</td></tr>
+        <tr><td class="s-name">第一节至第二节</td><td class="s-time">8:30—10:00</td></tr>
+        <tr><td class="s-name">第三节至第四节</td><td class="s-time">10:20—11:50</td></tr>
+        <tr><td class="s-name">午饭</td><td class="s-time">12:00</td></tr>
+        <tr class="section"><td colspan="2">下午</td></tr>
+        <tr><td class="s-name">预备</td><td class="s-time">13:50</td></tr>
+        <tr><td class="s-name">第五节至第六节</td><td class="s-time">14:00—15:30</td></tr>
+        <tr><td class="s-name">第七节至第八节</td><td class="s-time">15:40—17:10</td></tr>
+        <tr class="section"><td colspan="2">晚间</td></tr>
+        <tr><td class="s-name">晚饭</td><td class="s-time">18:00</td></tr>
+        <tr><td class="s-name">第九节至第十节</td><td class="s-time">19:00—21:00</td></tr>
+        <tr><td class="s-name">清理教室卫生</td><td class="s-time">21:00—21:20</td></tr>
+        <tr><td class="s-name">宿舍熄灯</td><td class="s-time">23:00</td></tr>
+      </tbody>
+    </table>
+    <div class="sch-foot">
+      <div>教职工下班时间：上午12:00；下午17:30</div>
+      <div>注：第四节下课时间以教务处错峰下课安排为准</div>
+    </div>
+  </div>
+
   <div class="foot">
     说明：周次为该课程开课周数；82人/125人课程为本班与艺术设计3班等合班上课；「—」表示该时段无课。
   </div>
@@ -509,13 +617,20 @@
   var wrap = document.querySelector('.table-wrap');
   var btnAll = document.getElementById('btn-all');
   var btnToday = document.getElementById('btn-today');
+  var btnSchedule = document.getElementById('btn-schedule');
+  var scheduleView = document.getElementById('schedule-view');
+  var foot = document.querySelector('.foot');
 
   function showAll() {
     btnAll.classList.add('active');
     btnToday.classList.remove('active');
+    btnSchedule.classList.remove('active');
     wrap.classList.remove('today-mode');
     document.body.classList.remove('today-view');
     cells.forEach(function (c) { c.classList.remove('col-hidden'); });
+    scheduleView.hidden = true;
+    wrap.hidden = false;
+    foot.hidden = false;
     title.textContent = BASE_TITLE;
     note.innerHTML = '当前显示：全部课程<span class="hint-mobile"> · 手机上可左右滑动查看</span>';
   }
@@ -523,8 +638,12 @@
   function showToday() {
     btnToday.classList.add('active');
     btnAll.classList.remove('active');
+    btnSchedule.classList.remove('active');
     wrap.classList.add('today-mode');
     document.body.classList.add('today-view');
+    scheduleView.hidden = true;
+    wrap.hidden = false;
+    foot.hidden = false;
     if (todayKey === 'sat' || todayKey === 'sun') {
       cells.forEach(function (c) { c.classList.add('col-hidden'); });
       title.textContent = BASE_TITLE;
@@ -538,8 +657,23 @@
     note.innerHTML = '当前显示：<b>' + DAY_NAMES[todayKey] + '</b>的课程，竖屏即可查看';
   }
 
+  function showSchedule() {
+    btnSchedule.classList.add('active');
+    btnAll.classList.remove('active');
+    btnToday.classList.remove('active');
+    wrap.classList.remove('today-mode');
+    document.body.classList.remove('today-view');
+    cells.forEach(function (c) { c.classList.remove('col-hidden'); });
+    scheduleView.removeAttribute('hidden');
+    wrap.hidden = true;
+    foot.hidden = true;
+    title.textContent = '2026级虚拟现实技术应用3班 · 作息时间表';
+    note.innerHTML = '当前显示：作息时间表（2024年5月6日起执行）';
+  }
+
   btnAll.addEventListener('click', showAll);
   btnToday.addEventListener('click', showToday);
+  btnSchedule.addEventListener('click', showSchedule);
 
   /* ========== 新增：今日课表移动端单列列表（数据源仍为表格） ========== */
   var todayList = document.getElementById('today-list');
@@ -569,9 +703,11 @@
       var slotEl = tr.querySelector('td.slot');
       var cell = tr.querySelector('td.course-cell[data-day="' + todayKey + '"]');
       if (!slotEl || !cell) continue;
-      var slotText = esc(slotEl.textContent.trim());
+      var slotText = esc(slotEl.firstChild ? slotEl.firstChild.textContent.trim() : '');
+      var slotTime = textOf(slotEl, '.slot-time');
+      var slotHtml = slotText + (slotTime ? '<span class="tl-slot-time">' + esc(slotTime) + '</span>' : '');
       if (cell.classList.contains('empty')) {
-        parts.push('<div class="tl-row tl-row-off"><div class="tl-slot">' + slotText +
+        parts.push('<div class="tl-row tl-row-off"><div class="tl-slot">' + slotHtml +
           '</div><div class="tl-main"><div class="tl-none">无课</div></div></div>');
         continue;
       }
@@ -592,7 +728,7 @@
           '<div class="tl-meta">' + esc(meta.join(' · ')) + '</div>' +
           '</div>';
       }
-      parts.push('<div class="tl-row"><div class="tl-slot">' + slotText +
+      parts.push('<div class="tl-row"><div class="tl-slot">' + slotHtml +
         '</div><div class="tl-main">' + inner + '</div></div>');
     }
     if (!parts.length) {
@@ -603,6 +739,7 @@
   }
 
   buildTodayList();
+  showToday();   // 默认进入今日课表视图
 </script>
 </body>
 </html>
